@@ -78,3 +78,23 @@ def cadastrar_clientes():  # define a função responsável por cadastrar um nov
 
     salvar_clientes_arquivo(nome, email, telefone)  # chama a função que salva o cliente no arquivo
     print(Fore.GREEN + "Cliente cadastrado com sucesso!\n" + Style.RESET_ALL)  # mostra uma mensagem de sucesso
+
+def listar_cliente():  # define a função responsável por listar os clientes
+    if not os.path.exists(ARQUIVO):  # verifica se o arquivo de clientes existe
+        print(Fore.YELLOW + "Não há nenhum cliente cadastrado\n" + Style.RESET_ALL)  # mostra uma mensagem caso o arquivo não exista
+        return  # encerra a função
+
+    clientes = ler_clientes_arquivo()  # chama a função para ler os clientes do arquivo
+
+    if not clientes:  # verifica se a lista de clientes está vazia
+        print(Fore.YELLOW + "Não há nenhum cliente cadastrado!\n" + Style.RESET_ALL)  # mostra uma mensagem caso não existam clientes
+        return  # encerra a função
+
+    print(Fore.CYAN + "\nLISTA DE CLIENTES" + Style.RESET_ALL)  # exibe o título da lista
+    print(f"{'NOME':<25}{'E-MAIL':<50}{'TELEFONE':<13}")  # cria o cabeçalho da tabela
+    print("-" * 100)  # imprime uma linha para separar o cabeçalho dos dados
+
+    for cliente in clientes:  # percorre todos os clientes da lista
+        print(f"{cliente['nome'].lower():<25}{cliente['email']:<50}{cliente['telefone']:<13}")  # exibe os dados organizados em colunas
+
+    print()  # imprime uma linha vazia
