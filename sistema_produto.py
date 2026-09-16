@@ -60,3 +60,40 @@ def iniciar_sistema_produto():
         arquivo.write(f"Produto: {produto}; Valor: R${valor:.2f}; quantidade: {quantidade}\n")
         
     print(Fore.GREEN + f"\nSucesso! {produto} foi cadastrado no sistema.\n" + Style.RESET_ALL)
+
+def lista_produtos():
+    if not os.path.exists(arquivo_dados):
+        print(Fore.LIGHTYELLOW_EX + "Nenhum arquivo de cadastro foi criado\n" + Style.RESET_ALL)
+        return
+    
+    with open(arquivo_dados, "r", encoding="utf-8") as arquivo:
+        linhas = arquivo.readlines()
+        
+    if len(linhas) == 0:
+        print(Fore.LIGHTYELLOW_EX + "Nenhum produto cadastrado\n" + Style.RESET_ALL)
+        return
+    
+    largura = 70 
+    
+    print(Fore.CYAN + "=" * largura)
+    print("PRODUTOS CADASTRADOS".center(largura))
+    print("=" * largura + Style.RESET_ALL)
+    
+    # As larguras de colunas definidas aqui (25, 20, 25)
+    print(f"\n{'PRODUTO':<25}{'VALOR':<20}{'QUANTIDADE':<25}")
+    print("-" * largura)
+    
+    for linha in linhas:
+        dados = linha.strip().split(";")
+        
+        if len(dados) == 3: 
+            
+            # Remove os prefixos para o terminal, assim a tabela não quebra o alinhamento
+            nomeProduto = dados[0].replace("Produto:", "").strip()
+            valorProduto = dados[1].replace("Valor:", "").replace("R$", "").strip()
+            quantidadeProduto = dados[2].replace("quantidade:", "").strip()
+            
+            valorExibicao = f"R$ {valorProduto}".replace(".",",")
+                
+            print(f"{nomeProduto:<25}{valorExibicao:<20}{quantidadeProduto:<25}")       
+    print()
