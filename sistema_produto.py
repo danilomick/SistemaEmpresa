@@ -49,4 +49,14 @@ def cadastro_quantidade(nome_produto):
                 continue
             return quantidade 
         except ValueError:
-            print(Fore.RED + "Erro! Quantidade inválida. Digite um número inteiro.\n" + Style.RESET_ALL)J
+            print(Fore.RED + "Erro! Quantidade inválida. Digite um número inteiro.\n" + Style.RESET_ALL)
+            
+def iniciar_sistema_produto():
+    produto = cadastro_produto()
+    valor = cadastro_valor(produto)
+    quantidade = cadastro_quantidade(produto)
+    
+    with open(arquivo_dados, "a", encoding="utf-8") as arquivo:
+        arquivo.write(f"Produto: {produto}; Valor: R${valor:.2f}; quantidade: {quantidade}\n")
+        
+    print(Fore.GREEN + f"\nSucesso! {produto} foi cadastrado no sistema.\n" + Style.RESET_ALL)
