@@ -182,3 +182,33 @@ def excluir_cliente():  # define a função responsável por excluir um cliente
             return  # encerra a função após encontrar o cliente
 
     print(Fore.RED + "Erro: Cliente não encontrado!\n" + Style.RESET_ALL)  # informa que nenhum cliente com aquele email foi encontrado
+
+
+def menu():  # define a função responsável por exibir e controlar o menu principal
+    largura = 70  # define a largura do menu como 70 caracteres
+    while True:  # inicia um loop infinito para manter o menu funcionando
+        print(Fore.CYAN + "=" * largura)  # imprime uma linha decorativa com 70 sinais de igual
+        print("SISTEMA DE CLIENTES".center(largura))  # exibe o título centralizado dentro dos 70 caracteres
+        print("=" * largura + Style.RESET_ALL)  # imprime outra linha decorativa e reseta a cor
+        
+        print(Fore.GREEN + "1. Cadastrar Cliente" + Style.RESET_ALL)  # exibe a opção de cadastrar cliente na cor verde
+        print(Fore.CYAN + "2. Listar Clientes" + Style.RESET_ALL)  # exibe a opção de listar clientes na cor ciano
+        print(Fore.LIGHTMAGENTA_EX + "3. Alterar Cliente" + Style.RESET_ALL)  # exibe a opção de alterar cliente na cor magenta
+        print(Fore.RED + "4. Excluir Cliente" + Style.RESET_ALL)  # exibe a opção de excluir cliente na cor vermelha
+        print(Fore.BLACK + "0. Sair" + Style.RESET_ALL)  # exibe a opção de sair do sistema
+        
+        opcao = input(Fore.CYAN + "Escolha uma opção: " + Style.RESET_ALL).strip()  # solicita ao usuário uma opção e remove espaços extras
+        
+        if opcao == "1":  # verifica se o usuário escolheu a opção 1
+            cadastrar_clientes()  # chama a função responsável por cadastrar um cliente
+        elif opcao == "2":  # verifica se o usuário escolheu a opção 2
+            listar_cliente()  # chama a função responsável por listar os clientes
+        elif opcao == "3":  # verifica se o usuário escolheu a opção 3
+            alterar_cliente()  # chama a função responsável por alterar um cliente
+        elif opcao == "4":  # verifica se o usuário escolheu a opção 4
+            excluir_cliente()  # chama a função responsável por excluir um cliente
+        elif opcao == "0":  # verifica se o usuário escolheu a opção 0
+            print(Fore.LIGHTYELLOW_EX + "Sistema encerrando...\n" + Style.RESET_ALL)  # exibe uma mensagem informando que o sistema será encerrado
+            break  # interrompe o loop e encerra o menu
+        else:  # executa caso o usuário escolha uma opção que não existe
+            print(Fore.RED + "Escolha uma opção valida!\n" + Style.RESET_ALL)  # mostra uma mensagem de erro
