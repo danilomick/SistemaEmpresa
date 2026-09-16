@@ -185,3 +185,55 @@ def alterar_produto():
     else:
         print(Fore.LIGHTYELLOW_EX + f"Produto '{encontrado}' não foi encontrado no sistema.\n" + Style.RESET_ALL)
         
+def excluir_produto():
+    if not os.path.exists(arquivo_dados):
+        print(Fore.LIGHTYELLOW_EX + "Nenhum arquivo de cadastro foi criado\n" + Style.RESET_ALL)
+        return
+        
+    with open(arquivo_dados, "r", encoding="utf-8") as arquivo:
+        linhas = arquivo.readlines()
+                
+    if len(linhas) == 0:
+        print(Fore.LIGHTYELLOW_EX + "Nenhum produto cadastrado\n" + Style.RESET_ALL)
+        return
+    
+    largura = 70
+    print(Fore.CYAN + "=" * largura)
+    print("PRODUTOS CADASTRADOS".center(largura))
+    print("=" * largura + Style.RESET_ALL)
+    print(f"\n{'PRODUTO':<25}{'VALOR':<20}{'QUANTIDADE':<25}")
+    print("-" * largura)
+    
+    for linha in linhas:
+        dados = linha.strip().split(";")
+        if len(dados) == 3:
+            nomeProduto = dados[0].replace("Produto:", "").strip()
+            valorProduto = dados[1].replace("Valor:", "").replace("R$", "").replace(".",",").strip()
+            quantidadeProduto = dados[2].replace("quantidade:", "").strip()
+            print(f"{nomeProduto:<25}R$ {valorProduto:<17}{quantidadeProduto:<25}")
+            
+    encontrado = input(Fore.LIGHTMAGENTA_EX + "\nDigite o nome do produto que deseja EXCLUIR: " + Style.RESET_ALL).strip().title()
+    
+    lista_nova = []
+    produto_achado = False
+    
+    for linha in linhas:
+        dados = linha.strip().split(";")
+        
+        if len(dados) == 3:
+            nome_atual = dados[0].replace("Produto:", "").strip().title()
+            
+            if nome_atual == encontrado:
+                produto_achado = True
+                print(Fore.GREEN + f"Produto '{nome_atual}' excluído com sucesso!\n" + Style.RESET_ALL)
+            else:
+                # Se não for o produto procurado, adicionamos ele na lista nova para ser mantido
+                lista_nova.append(linha)
+                
+    #Salvamos as alterações caso algo tenha sido excluído
+    if produto_achado:       
+        with open(arquivo_dados, "w", encoding="utf-8") as arquivo:
+            arquivo.writelines(lista_nova)
+    else:
+        print(Fore.LIGHTYELLOW_EX + f"Produto '{encontrado}' não encontrado.\n" + Style.RESET_ALL)
+        
