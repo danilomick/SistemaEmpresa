@@ -237,3 +237,15 @@ def excluir_produto():
     else:
         print(Fore.LIGHTYELLOW_EX + f"Produto '{encontrado}' não encontrado.\n" + Style.RESET_ALL)
         
+def menu_inicial():
+    largura = 70
+    
+    print(Fore.CYAN + "="*largura)
+    print("CADASTRO DOS PRODUTOS".center(largura))
+    print("="*largura + Style.RESET_ALL)  
+    print(Fore.GREEN+"1.Cadastrar Produto"+Style.RESET_ALL)
+    print(Fore.CYAN+"2.listar Produtos"+Style.RESET_ALL)
+    print(Fore.LIGHTMAGENTA_EX+"3.Alterar Produto"+Style.RESET_ALL)
+    print(Fore.RED+"4.Excluir Produto"+Style.RESET_ALL)
+    print(Fore.BLACK+"0.Sair"+Style.RESET_ALL)
+    
