@@ -249,3 +249,32 @@ def menu_inicial():
     print(Fore.RED+"4.Excluir Produto"+Style.RESET_ALL)
     print(Fore.BLACK+"0.Sair"+Style.RESET_ALL)
     
+def main_produto():
+    while True:
+        menu_inicial()
+        
+        try:
+            escolha = int(input("\nEscolha alguma das opções: "))
+        except ValueError:
+            print(Fore.RED + "Erro: Digite apenas números.\n" + Style.RESET_ALL)
+            continue
+            
+        if escolha < 0 or escolha > 4:
+            print(Fore.RED + "Escolha uma opção válida\n" + Style.RESET_ALL)
+            
+        elif escolha == 1:
+            iniciar_sistema_produto()
+            
+        elif escolha == 2:
+            lista_produtos()
+        
+        elif escolha == 3:
+            alterar_produto()
+            
+        elif escolha == 4:
+            excluir_produto()
+        
+        elif escolha == 0:
+            print(Fore.LIGHTYELLOW_EX + "Sistema encerrando..." + Style.RESET_ALL)
+            break
+    
