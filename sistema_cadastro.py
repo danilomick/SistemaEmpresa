@@ -29,3 +29,9 @@ def ler_clientes_arquivo():  # define a função responsável por ler os cliente
                 clientes.append({"nome": nome, "email": email, "telefone": telefone})  # adiciona o cliente à lista
 
     return clientes  # retorna a lista com todos os clientes
+
+def reescrever_arquivo(clientes):  # define a função responsável por reescrever o arquivo com os dados atualizados
+    with open(ARQUIVO, "w", encoding="utf-8") as arquivo:  # abre o arquivo no modo escrita, apagando o conteúdo anterior
+
+        for cliente in clientes:  # percorre cada cliente da lista
+            arquivo.write(f"{cliente['nome']};{cliente['email']};{cliente['telefone']}\n")  # escreve os dados atualizados no arquivo
