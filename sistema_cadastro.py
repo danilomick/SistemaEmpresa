@@ -156,3 +156,29 @@ def alterar_cliente():  # define a função responsável por alterar os dados de
     else:  # executa caso nenhum cliente tenha sido encontrado
         print(Fore.RED + "Erro: Cliente não encontrado!\n" + Style.RESET_ALL)  # exibe uma mensagem de erro
 
+def excluir_cliente():  # define a função responsável por excluir um cliente
+    listar_cliente()  # mostra a lista de clientes antes de realizar a exclusão
+    clientes = ler_clientes_arquivo()  # lê os clientes salvos e armazena em uma lista
+    if not clientes:  # verifica se não existem clientes cadastrados
+        print(Fore.YELLOW + "Não há nenhum cliente cadastrado para excluir!\n" + Style.RESET_ALL)  # informa que não há clientes para excluir
+        return  # encerra a função
+
+    print(Fore.CYAN + "\nEXCLUIR CLIENTE" + Style.RESET_ALL)  # exibe o título da opção excluir
+    email_busca = input("Digite o E-MAIL do cliente que deseja excluir: ").strip()  # solicita o email usado para localizar o cliente
+    
+    for i, cliente in enumerate(clientes):  # percorre a lista e também obtém a posição de cada cliente
+        if cliente["email"] == email_busca:  # verifica se o email informado corresponde ao cliente atual
+            print(Fore.YELLOW + f"Cliente encontrado: {cliente['nome'].upper()}" + Style.RESET_ALL)  # mostra o cliente encontrado
+            confirmacao = input("Tem certeza que deseja excluir? (S/N): ").strip().lower()  # pede confirmação e transforma a resposta em letras minúsculas
+            
+            if confirmacao == 's':  # verifica se o usuário confirmou a exclusão
+                del clientes[i]  # remove o cliente da lista usando sua posição
+                reescrever_arquivo(clientes)  # atualiza o arquivo com a lista sem o cliente excluído
+                print(Fore.GREEN + "Cliente excluído com sucesso!\n" + Style.RESET_ALL)  # mostra a mensagem de sucesso
+            if confirmacao == "n":  # verifica se o usuário cancelou a exclusão
+                print(Fore.YELLOW + "Exclusão cancelada pelo usuário.\n" + Style.RESET_ALL)  # informa que a exclusão foi cancelada
+            else:  # executa quando a resposta não for a esperada
+                print('Erro! Digite apenas "S" ou "N" ')  # mostra uma mensagem informando as opções válidas
+            return  # encerra a função após encontrar o cliente
+
+    print(Fore.RED + "Erro: Cliente não encontrado!\n" + Style.RESET_ALL)  # informa que nenhum cliente com aquele email foi encontrado
