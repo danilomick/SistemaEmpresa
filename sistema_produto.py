@@ -32,3 +32,21 @@ def cadastro_valor(nome_produto):
             return valor
         except ValueError:
             print(Fore.RED + "Erro! Valor inválido. Digite um número.\n" + Style.RESET_ALL)
+            
+def cadastro_quantidade(nome_produto):
+    while True:
+        quant = input(f"Digite a quantidade de {nome_produto}: ").strip()
+        
+        if len(quant) == 0:
+            print(Fore.RED + "Erro! Este campo não pode ficar em branco.\n" + Style.RESET_ALL)
+            continue
+            
+        try:
+            # quantidade é convertido em int agora, porque não é aceito strip em entrada int
+            quantidade = int(quant)
+            if quantidade < 0:
+                print(Fore.RED + "Erro! A quantidade não pode ser negativa.\n" + Style.RESET_ALL)
+                continue
+            return quantidade 
+        except ValueError:
+            print(Fore.RED + "Erro! Quantidade inválida. Digite um número inteiro.\n" + Style.RESET_ALL)J
