@@ -43,19 +43,19 @@ def cadastrar_clientes():  # define a função responsável por cadastrar um nov
         nome = input("Digite o nome do cliente: ").strip()  # solicita o nome e remove espaços extras
 
         if not nome:  # verifica se o nome está vazio
-            print(Fore.RED + "Erro! O nome não pode estar vazio." + Style.RESET_ALL)  # mostra uma mensagem de erro
+            print(Fore.RED + "Erro! O nome não pode estar vazio.\n" + Style.RESET_ALL)  # mostra uma mensagem de erro
             continue  # volta para o início do loop
 
         if nome.replace(" ", "").isalpha():  # verifica se o nome possui apenas letras, ignorando espaços
             break  # encerra o loop caso o nome seja válido
         else:  # executa caso o nome possua caracteres inválidos
-            print(Fore.RED + "Erro! O nome deve conter apenas letras." + Style.RESET_ALL)  # mostra uma mensagem de erro
+            print(Fore.RED + "Erro! O nome deve conter apenas letras.\n" + Style.RESET_ALL)  # mostra uma mensagem de erro
 
     while True:  # inicia um loop para validar o email
         email = input("Digite o email do cliente: ").strip()  # solicita o email e remove espaços extras
 
         if "@" not in email:  # verifica se o email possui o caractere @
-            print(Fore.RED + 'Erro! O email deve conter "@" .' + Style.RESET_ALL)  # mostra uma mensagem de erro
+            print(Fore.RED + 'Erro! O email deve conter "@" .\n' + Style.RESET_ALL)  # mostra uma mensagem de erro
             continue  # volta para o início do loop
 
         break  # encerra o loop caso o email seja válido
@@ -67,13 +67,13 @@ def cadastrar_clientes():  # define a função responsável por cadastrar um nov
         try:  # tenta verificar se o telefone possui somente números
             telefone_int = int("".join(telefone.replace("-", "").split()))  # remove hífen e espaços e converte para inteiro
         except:  # executa caso ocorra um erro na conversão
-            print(Fore.RED + "Erro! O telefone deve ser só numeros" + Style.RESET_ALL)  # mostra uma mensagem de erro
+            print(Fore.RED + "Erro! O telefone deve ser só numeros\n" + Style.RESET_ALL)  # mostra uma mensagem de erro
             continue  # volta para o início do loop
 
         if len(telefone) == limite_de_numeros:  # verifica se o telefone possui 13 caracteres
             break  # encerra o loop caso o telefone seja válido
         else:  # executa caso o telefone tenha tamanho incorreto
-            print(Fore.RED + 'Erro! o telefone deve ser no formato "xx xxxxx-xxxx"' + Style.RESET_ALL)  # mostra o formato correto
+            print(Fore.RED + 'Erro! o telefone deve ser no formato "xx xxxxx-xxxx"\n' + Style.RESET_ALL)  # mostra o formato correto
             continue  # volta para o início do loop
 
     salvar_clientes_arquivo(nome, email, telefone)  # chama a função que salva o cliente no arquivo
@@ -117,18 +117,18 @@ def alterar_cliente():  # define a função responsável por alterar os dados de
             while True:  # inicia um loop para validar o novo nome
                 novo_nome = input(f"Novo nome (Atual: {cliente['nome']}): ").strip()  # solicita o novo nome e remove espaços extras
                 if not novo_nome:  # verifica se o novo nome está vazio
-                    print(Fore.RED + "Erro! O nome não pode estar vazio." + Style.RESET_ALL)  # mostra uma mensagem de erro
+                    print(Fore.RED + "Erro! O nome não pode estar vazio.\n" + Style.RESET_ALL)  # mostra uma mensagem de erro
                     continue  # volta para o início do loop
                 if novo_nome.replace(" ", "").isalpha():  # verifica se o novo nome possui apenas letras, ignorando espaços
                     cliente["nome"] = novo_nome  # substitui o nome antigo pelo novo nome
                     break  # encerra o loop
                 else:  # executa caso o novo nome tenha caracteres inválidos
-                    print(Fore.RED + "Erro! O nome deve conter apenas letras." + Style.RESET_ALL)  # mostra uma mensagem de erro
+                    print(Fore.RED + "Erro! O nome deve conter apenas letras.\n" + Style.RESET_ALL)  # mostra uma mensagem de erro
 
             while True:  # inicia um loop para validar o novo email
                 novo_email = input(f"Novo e-mail (Atual: {cliente['email']}): ").strip()  # solicita o novo email
                 if "@" not in novo_email:  # verifica se o novo email possui o caractere @
-                    print(Fore.RED + 'Erro! O email deve conter "@" .' + Style.RESET_ALL)  # mostra uma mensagem de erro
+                    print(Fore.RED + 'Erro! O email deve conter "@" .\n' + Style.RESET_ALL)  # mostra uma mensagem de erro
                     continue  # volta para o início do loop
                 cliente["email"] = novo_email  # substitui o email antigo pelo novo
                 break  # encerra o loop
@@ -138,14 +138,14 @@ def alterar_cliente():  # define a função responsável por alterar os dados de
                 try:  # tenta verificar se o telefone contém apenas números, espaços e hífen
                     int("".join(novo_telefone.replace("-", "").split()))  # remove espaços e hífen e tenta converter o resultado para inteiro
                 except:  # executa caso a conversão apresente erro
-                    print(Fore.RED + "Erro! O telefone deve ser só numeros" + Style.RESET_ALL)  # mostra uma mensagem de erro
+                    print(Fore.RED + "Erro! O telefone deve ser só numeros\n" + Style.RESET_ALL)  # mostra uma mensagem de erro
                     continue  # volta para o início do loop
 
                 if len(novo_telefone) == 13:  # verifica se o telefone possui 13 caracteres
                     cliente["telefone"] = novo_telefone  # substitui o telefone antigo pelo novo
                     break  # encerra o loop
                 else:  # executa caso o telefone tenha tamanho diferente de 13
-                    print(Fore.RED + 'Erro! o telefone deve ser no formato "xx xxxxx-xxxx"' + Style.RESET_ALL)  # mostra o formato esperado
+                    print(Fore.RED + 'Erro! o telefone deve ser no formato "xx xxxxx-xxxx"\n' + Style.RESET_ALL)  # mostra o formato esperado
                     continue  # volta para o início do loop
 
             break  # encerra o loop de procura do cliente
